@@ -4,6 +4,7 @@
  */
 package frontend;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
@@ -20,8 +21,6 @@ public class MainWindow extends javax.swing.JFrame{
      */
     public MainWindow() {
         initComponents();
-        ImagenFondo fondo = new ImagenFondo();
-        
     }
 
     /**
@@ -37,7 +36,10 @@ public class MainWindow extends javax.swing.JFrame{
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,10 +49,21 @@ public class MainWindow extends javax.swing.JFrame{
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio    ");
+
+        jMenuItem3.setText("Ver Inventario");
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/ventas.png"))); // NOI18N
         jMenu2.setText("Ventas    ");
+
+        jMenuItem1.setText("Mostrar registro de ventas");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Ingresar venta");
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/estadisticas.png"))); // NOI18N
@@ -104,5 +117,8 @@ public class MainWindow extends javax.swing.JFrame{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
