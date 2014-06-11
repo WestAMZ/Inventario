@@ -3,17 +3,17 @@ import java.sql.*;
 import java.util.ArrayList;
 public class Conect 
 {
-    protected Connection con;
-    protected PreparedStatement sentenciaPre;
-    protected ResultSet datos;
-    protected Statement sentencia;
-    public void conectar() throws ClassNotFoundException, SQLException
+    protected static Connection con;
+    protected static PreparedStatement sentenciaPre;
+    protected static ResultSet datos;
+    protected static Statement sentencia;
+    public static void conectar() throws ClassNotFoundException, SQLException
     {
         Class.forName("com.mysql.jdbc.Driver");
         String url ="jdbc:Mysql://localhost/inventario";
         con = DriverManager.getConnection(url,"root","12345");        
     }
-    public ArrayList<Producto> findAll() throws SQLException
+    public static ArrayList<Producto> findAll() throws SQLException
     {
         sentenciaPre = con.prepareStatement("select * from productos");
         datos = sentenciaPre.executeQuery();
@@ -32,7 +32,7 @@ public class Conect
         }
         return productos;
     }
-    public boolean valideUser(User user) throws SQLException
+    public static boolean valideUser(User user) throws SQLException
     {
         boolean b = false;
         sentenciaPre = con.prepareStatement("select * from user");
