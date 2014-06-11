@@ -65,4 +65,10 @@ public class Producto
     public void setPrecio(float precio) {
         this.precio = precio;
     }
+     
+     public String toString()
+     {
+         String s = String.format(" nombre: %-30s\n proveedor : %-30s \n descripcion: %-30s\n",nombre,descripcion);
+         return s;
+     }
 }

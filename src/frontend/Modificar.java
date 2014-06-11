@@ -77,7 +77,7 @@ public class Modificar extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2);
 
-        setBounds(0, 0, 716, 333);
+        setBounds(0, 0, 751, 333);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -17,5 +17,35 @@ public class Conect
     {
         sentenciaPre = con.prepareStatement("select * from productos");
         datos = sentenciaPre.executeQuery();
+        ArrayList<Producto> productos = new ArrayList<>();
+        while(datos.next())
+        {
+            Producto p = new Producto();
+            p.setId(datos.getInt("id"));
+            p.setNombre(datos.getString("nombre"));
+            p.setCategoria(datos.getString("categoria"));
+            p.setProveedor(datos.getString("proveedor"));
+            p.setCosto(datos.getFloat("costo"));
+            p.setPrecio(datos.getFloat("precio"));
+            p.setDescripcion(datos.getString("descripcion"));
+            productos.add(p);
+        }
+        return productos;
+    }
+    public boolean valideUser(User user) throws SQLException
+    {
+        boolean b = false;
+        sentenciaPre = con.prepareStatement("select * from user");
+        datos = sentenciaPre.executeQuery();
+        while(datos.next())
+        {
+            if(datos.getString("name").equalsIgnoreCase(user.getName()) && 
+                    datos.getString("pass").equals(user.getPass()))
+            {
+                b = true;
+                break;
+            }
+        }
+        return b;
     }
 }
