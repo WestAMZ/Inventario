@@ -37,10 +37,16 @@ public class MainWindow extends javax.swing.JFrame{
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -50,17 +56,29 @@ public class MainWindow extends javax.swing.JFrame{
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio    ");
 
-        jMenuItem3.setText("Ver Inventario");
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/users.png"))); // NOI18N
+        jMenuItem3.setText("Users");
         jMenu1.add(jMenuItem3);
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/salir.png"))); // NOI18N
+        jMenuItem6.setText("Salir");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/ventas.png"))); // NOI18N
         jMenu2.setText("Ventas    ");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/registros.png"))); // NOI18N
         jMenuItem1.setText("Mostrar registro de ventas");
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/venta.png"))); // NOI18N
         jMenuItem2.setText("Ingresar venta");
         jMenu2.add(jMenuItem2);
 
@@ -68,13 +86,64 @@ public class MainWindow extends javax.swing.JFrame{
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/estadisticas.png"))); // NOI18N
         jMenu3.setText("Estadisticas    ");
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/mas.png"))); // NOI18N
+        jMenuItem4.setText("Más vendidos");
+        jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/menos.png"))); // NOI18N
+        jMenuItem5.setText("Menos vendidos");
+        jMenu3.add(jMenuItem5);
+
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/inventario.png"))); // NOI18N
+        jMenu4.setText("Inventario");
+
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/verInventario.png"))); // NOI18N
+        jMenuItem7.setText("Ver Inventariio");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/modificar2.png"))); // NOI18N
+        jMenuItem8.setText("Modificar registros");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        if(inventario==null)
+        {
+            inventario = new Inventario();
+            jDesktopPane1.add(inventario);
+            inventario.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Modificar modificar = new Modificar();
+        jDesktopPane1.add(modificar);
+        modificar.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,9 +185,16 @@ public class MainWindow extends javax.swing.JFrame{
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
+    private Inventario inventario = null;
 }

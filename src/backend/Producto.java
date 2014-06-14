@@ -8,6 +8,7 @@ public class Producto
     private String categoria;
     private float costo;
     private float precio;
+    private int unidades;
     public Producto(){}
 
     public int getId() {
@@ -71,4 +72,12 @@ public class Producto
          String s = String.format(" nombre: %-30s\n proveedor : %-30s \n descripcion: %-30s\n",nombre,descripcion);
          return s;
      }
+
+    public int getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(int unidades) {
+        this.unidades = unidades;
+    }
 }

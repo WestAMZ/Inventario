@@ -6,8 +6,11 @@ package frontend;
 
 import backend.Conect;
 import backend.Producto;
+import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +24,8 @@ public class Inventario extends javax.swing.JInternalFrame {
      */
     public Inventario() {
         initComponents();
+        this.loadTable();
+        
     }
 
     /**
@@ -35,6 +40,11 @@ public class Inventario extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,19 +85,25 @@ public class Inventario extends javax.swing.JInternalFrame {
     public void loadTable()
     {
         ArrayList<Producto> productos = null;
-        modelo = new DefaultTableModel();
+        
          try
         {
             productos = Conect.findAll();
+        System.out.print(productos.size());
         }catch(SQLException ex)
         {
             Message.error(this,ex.getMessage());
         }
-        modelo.addRow(new Object[]{" Id "," Nombre ","Categoria","Costo","Precio","Cantidad"});
+        Object[] titulos = {" Id "," Nombre ","Categoria","Costo","Precio","Unidades"};
+        Object[][] datos ={};
+        modelo = new DefaultTableModel(datos,titulos);
         for(Producto p: productos)
         {
-            modelo = new DefaultTableModel();
             
-        }    
+            Object[] newRow = new Object[]{p.getId(),p.getNombre(),p.getCategoria(),
+                p.getCosto(),p.getPrecio(),p.getUnidades()};
+            modelo.addRow(newRow);
+        }
+        tabla.setModel(modelo);
     }
 }

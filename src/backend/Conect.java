@@ -15,7 +15,7 @@ public class Conect
     }
     public static ArrayList<Producto> findAll() throws SQLException
     {
-        sentenciaPre = con.prepareStatement("select * from productos");
+        sentenciaPre = con.prepareStatement("select * from producto");
         datos = sentenciaPre.executeQuery();
         ArrayList<Producto> productos = new ArrayList<>();
         while(datos.next())
@@ -28,6 +28,7 @@ public class Conect
             p.setCosto(datos.getFloat("costo"));
             p.setPrecio(datos.getFloat("precio"));
             p.setDescripcion(datos.getString("descripcion"));
+            p.setUnidades(datos.getInt("Cantidad"));
             productos.add(p);
         }
         return productos;
@@ -47,5 +48,12 @@ public class Conect
             }
         }
         return b;
+    }
+    public static void newProducto(Producto p) throws SQLException
+    {
+        String values=String.format("'%s','%s','%s','%s','%s','%s','%s'",p.getNombre(),p.getCategoria(),
+                p.getProveedor(),p.getCosto(),p.getPrecio(),p.getUnidades(),p.getDescripcion());
+        con.prepareStatement("insert into producto (nombre,categoria,proveedor,costo,precio,Cantidad)"+
+                ",descripcion) values("+values +")");
     }
 }
