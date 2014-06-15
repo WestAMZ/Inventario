@@ -1,8 +1,13 @@
 package backend;
+import frontend.Ventas;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 public class Conect 
 {
+    public static float totalmessage;
     protected static Connection con;
     protected static PreparedStatement sentenciaPre;
     protected static ResultSet datos;
@@ -27,7 +32,7 @@ public class Conect
             p.setProveedor(datos.getString("proveedor"));
             p.setCosto(datos.getFloat("costo"));
             p.setPrecio(datos.getFloat("precio"));
-            p.setDescripcion(datos.getString("descripcion"));
+        //  p.setDescripcion(datos.getString("descripcion"));
             p.setUnidades(datos.getInt("Cantidad"));
             productos.add(p);
         }
@@ -56,4 +61,38 @@ public class Conect
         con.prepareStatement("insert into producto (nombre,categoria,proveedor,costo,precio,Cantidad)"+
                 ",descripcion) values("+values +")");
     }
+    
+    public static void AgregarVenta(List<Producto> p) throws SQLException{
+    
+       List <Producto> pr = new ArrayList<>();
+       pr.addAll(p);
+       float total ;
+       totalmessage = 0;
+       for(Producto pro: pr){
+           total = pro.getCantidad() * pro.getPrecio();
+           totalmessage += total ;
+             sentenciaPre = con.prepareStatement("insert into venta()values(?,?,?,?,?,?,?)");
+             
+             
+             sentenciaPre.setString(1, pro.getNombre());
+             sentenciaPre.setInt(2, pro.getCantidad());
+             sentenciaPre.setFloat(3, total);
+             sentenciaPre.setString(4, pro.getCliente());
+             sentenciaPre.setFloat(5, pro.getPrecio());
+             sentenciaPre.setString(6, pro.getCategoria());
+             sentenciaPre.setDate(7, new java.sql.Date(pro.getDate().getTime()));
+             sentenciaPre.executeUpdate();
+             total = 0;
+       }
+    }
+    
+    public static float totalpagar(){
+       
+       return totalmessage;
+    }
+    
+ /*   public static List<Producto> VerRVentas() throws SQLException{
+    
+            return p;
+       }*/
 }

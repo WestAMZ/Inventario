@@ -56,6 +56,7 @@ public class Modificacion extends javax.swing.JDialog {
         txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menu de Ingreso");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 

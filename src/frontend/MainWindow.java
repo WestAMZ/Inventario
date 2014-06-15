@@ -4,10 +4,6 @@
  */
 package frontend;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -33,6 +29,7 @@ public class MainWindow extends javax.swing.JFrame{
     private void initComponents() {
 
         jColorChooser1 = new javax.swing.JColorChooser();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -51,17 +48,26 @@ public class MainWindow extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        jDesktopPane1.setToolTipText("Sistema de Inventario");
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+
+        jMenuBar1.setToolTipText("Barra de Menus del Sistema");
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio    ");
+        jMenu1.setToolTipText("Menu Inicio");
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/users.png"))); // NOI18N
         jMenuItem3.setText("Users");
+        jMenuItem3.setToolTipText("Menu Usuarios en el Sistema");
         jMenu1.add(jMenuItem3);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/salir.png"))); // NOI18N
         jMenuItem6.setText("Salir");
+        jMenuItem6.setToolTipText("Salir de la Aplicacion");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -73,35 +79,68 @@ public class MainWindow extends javax.swing.JFrame{
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/ventas.png"))); // NOI18N
         jMenu2.setText("Ventas    ");
+        jMenu2.setToolTipText("permite el registro de transacciones relacionados con las ventas");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/registros.png"))); // NOI18N
         jMenuItem1.setText("Mostrar registro de ventas");
+        jMenuItem1.setToolTipText("Muestra Registro de las Ventas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/venta.png"))); // NOI18N
-        jMenuItem2.setText("Ingresar venta");
+        jMenuItem2.setText("Realizar venta");
+        jMenuItem2.setToolTipText("Realizar Transaccion Comercial de Venta");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/estadisticas.png"))); // NOI18N
         jMenu3.setText("Estadisticas    ");
+        jMenu3.setToolTipText("Genera modelos estadisticos de los ingresos de productos.");
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/mas.png"))); // NOI18N
         jMenuItem4.setText("Más vendidos");
+        jMenuItem4.setToolTipText("Genera un top de los Productos mas Rentables");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/menos.png"))); // NOI18N
         jMenuItem5.setText("Menos vendidos");
+        jMenuItem5.setToolTipText("Genera un top de los Productos menos Rentables");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/inventario.png"))); // NOI18N
         jMenu4.setText("Inventario");
+        jMenu4.setToolTipText("Acceso a la Informacion acerca del Inventario disponoble");
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/verInventario.png"))); // NOI18N
-        jMenuItem7.setText("Ver Inventariio");
+        jMenuItem7.setText("Ver Inventario");
+        jMenuItem7.setToolTipText("Muestra Inventario");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -109,8 +148,10 @@ public class MainWindow extends javax.swing.JFrame{
         });
         jMenu4.add(jMenuItem7);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontend/images/modificar2.png"))); // NOI18N
         jMenuItem8.setText("Modificar registros");
+        jMenuItem8.setToolTipText("Modifica, Actualiza y elimina un producto seleccionado");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -144,6 +185,40 @@ public class MainWindow extends javax.swing.JFrame{
         jDesktopPane1.add(modificar);
         modificar.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        Ventas v = new Ventas();
+        v.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        
+        Grp f = new Grp();
+        f.CapturarPastel();
+        jDesktopPane1.add(f);
+        f.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        
+         GrpSecond f1 = new GrpSecond();
+         f1.CapturarPastel();
+         jDesktopPane1.add(f1);
+         f1.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        FindVenta fv = new FindVenta();
+        jDesktopPane1.add(fv);
+        fv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +255,7 @@ public class MainWindow extends javax.swing.JFrame{
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
