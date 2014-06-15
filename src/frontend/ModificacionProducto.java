@@ -8,21 +8,21 @@ import backend.Conect;
 import backend.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
  * @author casa
  */
-public class Modificacion extends javax.swing.JDialog {
+public class ModificacionProducto extends javax.swing.JDialog {
 
     /**
-     * Creates new form Modificacion
+     * Creates new form ModificacionProducto
      */
-    public Modificacion(java.awt.Frame parent, boolean modal) {
+    public ModificacionProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -55,8 +55,13 @@ public class Modificacion extends javax.swing.JDialog {
         txtCosto = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Menu de Ingreso");
+        setTitle("Producto");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -82,7 +87,7 @@ public class Modificacion extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Nuevo producto");
+        jLabel1.setText("Producto  a modificar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -198,6 +203,12 @@ public class Modificacion extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(14, 8, 0, 0);
         jPanel2.add(jLabel8, gridBagConstraints);
+
+        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 8;
@@ -207,6 +218,12 @@ public class Modificacion extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 10, 26, 0);
         jPanel2.add(txtCosto, gridBagConstraints);
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 18;
         gridBagConstraints.gridy = 8;
@@ -219,6 +236,7 @@ public class Modificacion extends javax.swing.JDialog {
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -242,19 +260,47 @@ public class Modificacion extends javax.swing.JDialog {
                 producto.setPrecio(precio);
                 producto.setUnidades(unidades);
                 producto.setDescripcion(txtDescripcion.getText());
-                Conect.newProducto(producto);
-                this.setVisible(false);
-                this.dispose();
+                Conect.updateProducto(producto,producto2);
+                Message.information(this,"Se ha Modificado registro");
+                
             } catch (SQLException ex) {
                 Message.error(this,ex.getMessage());
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void txtCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyTyped
+        
+       char car = evt.getKeyChar();  
+       if((car<'0' || car>'9') && txtCosto.getText().contains("."))
+       {
+          evt.consume();
+       }else if((car<'0' || car>'9') && (car!='.'))
+       {
+           evt.consume();
+       } 
+    }//GEN-LAST:event_txtCostoKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+      char car = evt.getKeyChar();  
+       if((car<'0' || car>'9') && txtPrecio.getText().contains("."))
+       {
+          evt.consume();
+       }else if((car<'0' || car>'9') && (car!='.'))
+       {
+           evt.consume();
+       } 
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String[]args) {
+    public static void main(String[]args,Producto prod) {
+        ModificacionProducto.producto2 = prod;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -268,26 +314,28 @@ public class Modificacion extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificacionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificacionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificacionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificacionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Modificacion dialog = new Modificacion(new javax.swing.JFrame(), true);
+                ModificacionProducto dialog = new ModificacionProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
+                        
                     }
                 });
+                
+                dialog.load(ModificacionProducto.producto2);
                 dialog.setVisible(true);
             }
         });
@@ -316,7 +364,10 @@ public class Modificacion extends javax.swing.JDialog {
     private int option =0;
     static int APROVE_OPTION=1;
     static int CANCEL_OPTION=0;
-    private Producto producto=null;
+    static private Producto producto=null;
+    static private Producto producto2=null;
+    
+    
    public Producto getpProducto()
    {
        return producto;
@@ -324,24 +375,24 @@ public class Modificacion extends javax.swing.JDialog {
    public boolean validateP()
    {
        boolean b = false;
-       if(txtNombre.getText()!="" || txtPrecio.getText()!="" || txtCosto.getText()!="" || txtCantidad.getText()!="" )
+       if(!(txtNombre.getText().equals("") || txtPrecio.getText().equals("") || txtCosto.getText().equals("") || txtCantidad.getText()!="" ))
        {
            b=true;
-           try {
-               b = true;
-               ArrayList<Producto> lista = Conect.findAll();
-               for(Producto p:lista)
-               {
-                   if(txtNombre.getText().equalsIgnoreCase(p.getNombre()))
-                   {
-                       Message.warning(this,"ya existe un producto conese nombre!!");
-                       b = false;
-                   }
-               }
-           } catch (SQLException ex) {
-               Message.error(this,ex.getMessage());
-           }
+           
        }
+       else 
+           Message.warning(this,"Debe Ingresar los campos requeridos!!");
        return b;
+   }
+   public void load(Producto p)
+   {
+      
+      txtCantidad.setText(String.format("%s",p.getUnidades()));
+      txtCategoria.setText(String.format("%s",p.getCategoria()));
+      txtCosto.setText(String.format("%s",p.getCosto()));;
+      txtDescripcion.setText(String.format("%s",p.getDescripcion()));;
+      txtNombre.setText(String.format("%s",p.getNombre()));;
+      txtPrecio.setText(String.format("%s",p.getPrecio()));;
+      txtProveedor.setText(String.format("%s",p.getProveedor()));;
    }
 }

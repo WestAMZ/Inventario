@@ -11,4 +11,8 @@ public class Message
     {
         JOptionPane.showMessageDialog(comp,message,"Warning",JOptionPane.WARNING_MESSAGE);
     }
+    public static void information(Component comp,String message)
+    {
+        JOptionPane.showMessageDialog(comp,message,"Warning",JOptionPane.INFORMATION_MESSAGE);
+    }
 }

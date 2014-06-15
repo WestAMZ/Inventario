@@ -168,12 +168,9 @@ public class MainWindow extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        if(inventario==null)
-        {
-            inventario = new Inventario();
+        Inventario inventario = new Inventario();
             jDesktopPane1.add(inventario);
             inventario.setVisible(true);
-        }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -181,7 +178,7 @@ public class MainWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        Modificar modificar = new Modificar();
+        ModificarRegistrosP modificar = new ModificarRegistrosP();
         jDesktopPane1.add(modificar);
         modificar.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
@@ -272,5 +269,5 @@ public class MainWindow extends javax.swing.JFrame{
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
-    private Inventario inventario = null;
+    
 }

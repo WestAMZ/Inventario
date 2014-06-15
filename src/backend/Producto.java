@@ -11,45 +11,20 @@ public class Producto
     private String categoria;
     private float costo;
     private float precio;
-    private int cantidad;
     private int unidades;
+    private int cantidad;
     private Date date;
     private String client;
-    
-    
     public Producto(){}
 
-    public Producto(int id, String descripcion, String proveedor, String categoria, float costo, float precio, int cantidad, int unidades, Date date, String client) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.proveedor = proveedor;
-        this.categoria = categoria;
-        this.costo = costo;
-        this.precio = precio;
-        this.cantidad = cantidad;
-        this.unidades = unidades;
-        this.date = date;
-        this.client = client;
-    }
-   
-    
     public int getId() {
         return id;
-    }
-    
-     public int getCantidad() {
-        return cantidad;
     }
 
     public String getNombre() {
         return nombre;
     }
-    
-    public String getCliente() {
-        
-        return client;
-    }
-    
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -73,10 +48,6 @@ public class Producto
     public void setId(int id) {
         this.id = id;
     }
-    
-     public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -89,10 +60,6 @@ public class Producto
     public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
-    
-    public void setCliente(String client) {
-        this.client = client;
-    }
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
@@ -101,19 +68,14 @@ public class Producto
     public void setCosto(float costo) {
         this.costo = costo;
     }
-    
-    public void setDate(Date date){
-      
-        this.date = date;
-    }
+
     public void setPrecio(float precio) {
         this.precio = precio;
     }
      
-    @Override
      public String toString()
      {
-         String s = String.format(" nombre: %-30s\n proveedor : %-30s \n descripcion: %-30s\n",nombre,descripcion);
+         String s = String.format(" nombre: %s\n proveedor : %s \n descripcion: %s\n Costo: %s Precio: %s ",nombre,proveedor,descripcion,precio,costo);
          return s;
      }
 
@@ -124,7 +86,23 @@ public class Producto
     public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
-    
+    public int getCantidad() {
+        return cantidad;
+    }
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    public void setDate(Date date){
+      
+        this.date = date;
+    }
+    public String getCliente() {
+        
+        return client;
+    }
+    public void setCliente(String client) {
+        this.client = client;
+    }
     public Date getDate(){
     
          return this.date;

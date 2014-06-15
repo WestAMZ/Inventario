@@ -16,7 +16,8 @@ public class Conect
     {
         Class.forName("com.mysql.jdbc.Driver");
         String url ="jdbc:Mysql://localhost/inventario";
-        con = DriverManager.getConnection(url,"root","12345");        
+        con = DriverManager.getConnection(url,"root","12345");
+        sentencia=con.createStatement();
     }
     public static ArrayList<Producto> findAll() throws SQLException
     {
@@ -54,15 +55,7 @@ public class Conect
         }
         return b;
     }
-    public static void newProducto(Producto p) throws SQLException
-    {
-        String values=String.format("'%s','%s','%s','%s','%s','%s','%s'",p.getNombre(),p.getCategoria(),
-                p.getProveedor(),p.getCosto(),p.getPrecio(),p.getUnidades(),p.getDescripcion());
-        con.prepareStatement("insert into producto (nombre,categoria,proveedor,costo,precio,Cantidad)"+
-                ",descripcion) values("+values +")");
-    }
-    
-    public static void AgregarVenta(List<Producto> p) throws SQLException{
+       public static void AgregarVenta(List<Producto> p) throws SQLException{
     
        List <Producto> pr = new ArrayList<>();
        pr.addAll(p);
@@ -95,4 +88,24 @@ public class Conect
     
             return p;
        }*/
+    public static void newProducto(Producto p) throws SQLException
+    {
+        
+        String values=String.format("\'%s\',\'%s\',\'%s\',%s,%s,%s,\'%s\'",p.getNombre(),p.getCategoria(),
+                p.getProveedor(),p.getCosto(),p.getPrecio(),p.getUnidades(),p.getDescripcion());
+        
+        sentencia.executeUpdate("insert into producto (nombre,categoria,proveedor,costo,precio,Cantidad,descripcion) values("+values +");");
+        
+    }
+    public static void deleProducto(Producto p) throws SQLException
+    {
+        sentencia.executeUpdate(String.format("delete from producto where nombre =\'%s\'",p.getNombre()));
+    }
+    public static void updateProducto(Producto p1,Producto p2) throws SQLException
+    {
+        String values =String.format("nombre=\'%s\',categoria=\'%s\',proveedor=\'%s\',costo=%s,precio=%s,Cantidad=%s,descripcion=\'%s\'"
+                ,p1.getNombre(),p1.getCategoria(),p1.getProveedor(),p1.getCosto(),p1.getPrecio(),p1.getUnidades(),p1.getDescripcion());
+        sentencia.executeUpdate("update producto set "+values+"where id=\'"+p2.getId()+"\'");
+    }
+    
 }
