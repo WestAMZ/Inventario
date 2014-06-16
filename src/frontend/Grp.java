@@ -8,6 +8,7 @@ package frontend;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartUtilities;
 
@@ -20,9 +21,9 @@ public class Grp extends javax.swing.JInternalFrame {
     /**
      * Creates new form Grp
      */
-    public void CapturarPastel(){
+    public void CapturarPastel() {
     
-      jTabbedPane1.addTab("G.Pastel", Graphic.crearPanel());
+      jTabbedPane1.addTab("G.Pastel", Graphic.crearPanel(1));
       this.setVisible(true);
        
     }
@@ -73,7 +74,7 @@ public class Grp extends javax.swing.JInternalFrame {
         
      try
        {
-              ChartUtilities.saveChartAsJPEG(new File("MasVendidoPastel.jpg"), Graphic.crearChart(), jTabbedPane1.getWidth(), jTabbedPane1.getHeight());
+              ChartUtilities.saveChartAsJPEG(new File("MasVendidoPastel.jpg"), Graphic.data(), jTabbedPane1.getWidth(), jTabbedPane1.getHeight());
               JOptionPane.showMessageDialog(this, "El Modelo se Ha guardado en la carpeta del Proyecto","Message",JOptionPane.INFORMATION_MESSAGE);     
         } 
      catch (IOException ex) {

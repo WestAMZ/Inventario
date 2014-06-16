@@ -8,7 +8,9 @@ package frontend;
 import backend.Conect;
 import backend.User;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -76,6 +78,11 @@ public class Inicial extends javax.swing.JDialog {
                 btnAceptarActionPerformed(evt);
             }
         });
+        btnAceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnAceptarKeyReleased(evt);
+            }
+        });
         jPanel2.add(btnAceptar);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
@@ -91,6 +98,15 @@ public class Inicial extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(25, 0, 9, 0);
         jPanel3.add(jLabel1, gridBagConstraints);
+
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUserKeyReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -99,6 +115,12 @@ public class Inicial extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(37, 30, 0, 26);
         jPanel3.add(txtUser, gridBagConstraints);
+
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPassKeyReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -132,26 +154,39 @@ public class Inicial extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        user = new User();
-        user.setName(txtUser.getText());
-        user.setPass(txtPass.getText());
-        try{
-            Conect.conectar();
-            b = Conect.valideUser(user);
-            if(!b)
-            {
-                Message.error(this,"contraseña o usuario no validos");
-            }
-            else
-            {
-                this.setVisible(false);
-                this.dispose();
-            }
-        }catch(SQLException | ClassNotFoundException ex)
-        {
-            Message.error(this,ex.getMessage());
-        }
+       Entrar();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyReleased
+        // TODO add your handling code here:
+        
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+            txtPass.requestFocusInWindow();
+         }
+    }//GEN-LAST:event_txtUserKeyReleased
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+
+    }//GEN-LAST:event_txtUserKeyPressed
+
+    private void txtPassKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyReleased
+        // TODO add your handling code here:
+       
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+          btnAceptar.requestFocusInWindow();
+         }
+    }//GEN-LAST:event_txtPassKeyReleased
+
+    private void btnAceptarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarKeyReleased
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+         Entrar();
+        
+        }
+    }//GEN-LAST:event_btnAceptarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -213,4 +248,27 @@ public class Inicial extends javax.swing.JDialog {
     {
         return b;
     }  
+    
+    public void Entrar(){
+     user = new User();
+        user.setName(txtUser.getText());
+        user.setPass(txtPass.getText());
+        try{
+            Conect.conectar();
+            b = Conect.valideUser(user);
+            if(!b)
+            {
+                Message.error(this,"contraseña o usuario no validos");
+            }
+            else
+            {
+                this.setVisible(false);
+                this.dispose();
+            }
+        }catch(SQLException | ClassNotFoundException ex)
+        {
+            Message.error(this,ex.getMessage());
+        }
+    
+    }
 }

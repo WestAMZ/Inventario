@@ -109,7 +109,7 @@ public class ModificarRegistrosP extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        setBounds(0, 0, 841, 401);
+        setBounds(300, 100, 841, 401);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -133,7 +133,7 @@ public class ModificarRegistrosP extends javax.swing.JInternalFrame {
         }
         else
         {
-            Message.information(this,"Para modificar tiene que seleccionar un elemento de a modificar");
+            Message.information(this,"Para modificar tiene que seleccionar un elemento");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -156,7 +156,7 @@ public class ModificarRegistrosP extends javax.swing.JInternalFrame {
         }
         else
         {
-            Message.information(this,"Para eliminar tiene que seleccionar un elemento de a modificar");
+            Message.information(this,"Para eliminar tiene que seleccionar un elemento");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

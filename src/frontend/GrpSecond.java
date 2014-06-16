@@ -22,7 +22,7 @@ public class GrpSecond extends javax.swing.JInternalFrame {
      */
      public void CapturarPastel(){
     
-      jTabbedPane1.addTab("G.Pastel", Graphic.crearPanel());
+      jTabbedPane1.addTab("G.Pastel", Graphic.crearPanel(2));
       this.setVisible(true);
        
     }
@@ -74,7 +74,7 @@ public class GrpSecond extends javax.swing.JInternalFrame {
         
       try
        {
-              ChartUtilities.saveChartAsJPEG(new File("MenosVendidoPastel.jpg"), Graphic.crearChart(), jTabbedPane1.getWidth(), jTabbedPane1.getHeight());
+              ChartUtilities.saveChartAsJPEG(new File("MenosVendidoPastel.jpg"), Graphic.data(), jTabbedPane1.getWidth(), jTabbedPane1.getHeight());
               JOptionPane.showMessageDialog(this, "El Modelo se Ha guardado en la carpeta del Proyecto","Message",JOptionPane.INFORMATION_MESSAGE);     
         } 
      catch (IOException ex) {

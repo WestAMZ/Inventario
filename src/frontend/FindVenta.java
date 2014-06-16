@@ -6,8 +6,12 @@
 
 package frontend;
 
+import backend.Conect;
 import backend.Producto;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class FindVenta extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo;
-    String [] cabecera = {"Id","Nombre","Descripcion","Cliente","Fecha","Precio","Cantidad"};
+    String [] cabecera = {"Id","Nombre","Descripcion","Cliente","Fecha","Pago","P.Unit","Cantidad"};
     String [][] Datos = {}; 
     private  List <Producto> p;
     
@@ -46,30 +50,30 @@ public class FindVenta extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Busqueda de Ventas");
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jtabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cliente", "Producto", "Descripcion", "Fecha", "Pago", "P.Unt", "Cantidad"
+                "Cliente", "Id", "Producto", "Descripcion", "Fecha", "Pago", "P.Unt", "Cantidad"
             }
         ));
         jScrollPane1.setViewportView(jtabla);
         modelo = new DefaultTableModel(Datos,cabecera);
         jtabla.setModel(modelo);
 
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jScrollPane1);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pack();
+        setBounds(400, 200, 602, 151);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -78,4 +82,35 @@ public class FindVenta extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtabla;
     // End of variables declaration//GEN-END:variables
+
+ public void Insertar(){
+       
+      jtabla.getColumnModel().getColumn(0).setPreferredWidth(70);
+      jtabla.getColumnModel().getColumn(1).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(2).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(3).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(4).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(5).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(6).setPreferredWidth(150);
+      jtabla.getColumnModel().getColumn(7).setPreferredWidth(150);
+      
+        try {
+            p = Conect.VerRVentas();
+            
+            int c = p.size();
+            
+            for(int a = 0; a < c; a++){
+                
+                Producto emp = p.get(a);
+                
+                Object[] newRow = {emp.getId()  ,emp.getNombre() ,emp.getCategoria(), emp.getCliente(),
+                    emp.getDate(),emp.getCosto(),emp.getPrecio() ,emp.getCantidad()};
+                modelo.addRow(newRow);    
+            }
+        }
+      catch (SQLException ex) {
+            Logger.getLogger(FindVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  }
+
 }

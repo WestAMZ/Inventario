@@ -4,6 +4,7 @@
  */
 package frontend;
 
+import java.sql.SQLException;
 import javax.swing.JFrame;
 
 /**
@@ -198,6 +199,7 @@ public class MainWindow extends javax.swing.JFrame{
         f.CapturarPastel();
         jDesktopPane1.add(f);
         f.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -214,6 +216,7 @@ public class MainWindow extends javax.swing.JFrame{
         
         FindVenta fv = new FindVenta();
         jDesktopPane1.add(fv);
+        fv.Insertar();
         fv.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

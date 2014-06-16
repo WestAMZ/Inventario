@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author casa
  */
 public class Inventario extends javax.swing.JInternalFrame {
-
+ 
     /**
      * Creates new form Inventario
      */
@@ -47,7 +47,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Inventario Disponible");
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,22 +62,25 @@ public class Inventario extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jScrollPane1);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        setBounds(0, 0, 543, 118);
+        setBounds(400, 200, 535, 120);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
-    private DefaultTableModel modelo = null;
+  
+      private DefaultTableModel modelo;
+      Object[] titulos = {" Id "," Nombre ","Categoria","Costo","Precio","Unidades"};
+      Object [][] datos ={};
     public void loadTable()
     {
         ArrayList<Producto> productos = null;
-        
+       modelo = new DefaultTableModel(datos,titulos);
          try
         {
             productos = Conect.findAll();
@@ -86,9 +89,7 @@ public class Inventario extends javax.swing.JInternalFrame {
         {
             Message.error(this,ex.getMessage());
         }
-        Object[] titulos = {" Id "," Nombre ","Categoria","Costo","Precio","Unidades"};
-        Object[][] datos ={};
-        modelo = new DefaultTableModel(datos,titulos);
+       
         for(Producto p: productos)
         {
             

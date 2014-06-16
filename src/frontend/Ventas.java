@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ventas extends javax.swing.JDialog {
 
+    private boolean  c = false;
     private int id;
     private  List <Producto> p;
     private  List <Producto> p2 = new ArrayList<>();
@@ -57,6 +59,7 @@ public class Ventas extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         Realizar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -97,6 +100,12 @@ public class Ventas extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 58, 0, 0);
         jPanel7.add(jLabel1, gridBagConstraints);
+
+        jdch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jdchKeyReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -130,7 +139,20 @@ public class Ventas extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButton2KeyReleased(evt);
+            }
+        });
         jPanel4.add(jButton2);
+
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
@@ -175,8 +197,14 @@ public class Ventas extends javax.swing.JDialog {
         jPanel2.add(jLabel10, gridBagConstraints);
 
         cod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                codKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 codKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codKeyTyped(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -193,6 +221,11 @@ public class Ventas extends javax.swing.JDialog {
         cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clienteActionPerformed(evt);
+            }
+        });
+        cliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                clienteKeyReleased(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -255,6 +288,12 @@ public class Ventas extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 4, 0, 0);
         jPanel2.add(desc, gridBagConstraints);
+
+        cant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cantKeyReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 23;
         gridBagConstraints.gridy = 2;
@@ -307,7 +346,7 @@ public class Ventas extends javax.swing.JDialog {
 
         getContentPane().add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        pack();
+        setBounds(400, 200, 661, 413);
     }// </editor-fold>//GEN-END:initComponents
 
     private void descActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descActionPerformed
@@ -315,59 +354,13 @@ public class Ventas extends javax.swing.JDialog {
     }//GEN-LAST:event_descActionPerformed
 
     private void codKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codKeyReleased
-        // TODO add your handling code here:
-         
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            
-          id = Integer.parseInt(cod.getText());
-            try {
-                  p = Conect.findAll();
-                  
-                   for(Producto p1: p){
-                       if(p1.getId() == id){
-                       
-                            producto.setText(p1.getNombre());
-                            desc.setText(p1.getCategoria());
-                            precio.setText(String.valueOf(p1.getPrecio()));
-                       }
-                   }
-                } 
-            catch (SQLException ex) {
-                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
+        // TODO add your handling code here    
     }//GEN-LAST:event_codKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          
-        for(int a = 0; a < p.size(); a++){
-            
-                Producto pr = p.get(a);
-               if(pr.getId() == id){
-          
-                 pr.setDate(jdch.getDate());
-                 pr.setCantidad(Integer.parseInt(cant.getText()));
-                 pr.setCliente(cliente.getText());
-                 p2.add(pr);
-                 
-               }
-            }
-        
-         Table();
-         producto.setText("");
-         desc.setText("");
-         precio.setText("");
-         cliente.setText("");
-         desc.setText("");
-         cant.setText("");
-         cod.setText("");
-         
-         Date fecha = new Date();
-         jdch.setDateFormatString("dd/MM/yyyy");
-         jdch.setDate(fecha);
-         
+       Agregar();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -377,23 +370,128 @@ public class Ventas extends javax.swing.JDialog {
 
     private void RealizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarActionPerformed
       
+         if(jtabla.getRowCount() != 0){
         try {      
                Conect.AgregarVenta(p2);
               
-               Pago p = new Pago();
-               p.asignar();
-               p.setVisible(true);
+               Pago pg = new Pago();
+               pg.asignar();
+               pg.setVisible(true);
                
                p2.clear();
               modelo = new DefaultTableModel(Datos,cabecera);
               jtabla.setModel(modelo);
+              cliente.setText("");
               
         } 
         catch (SQLException ex) {
             Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+     }
+      else{
+             Message.error(this, "No ha agregado productos a la descripcion de venta");
+      }
+        
     }//GEN-LAST:event_RealizarActionPerformed
+
+    private void clienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteKeyReleased
+           
+        if(evt.getKeyCode() == KeyEvent.VK_F1){
+             cant.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_clienteKeyReleased
+
+    private void cantKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+           jButton2.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_cantKeyReleased
+
+    private void jButton2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+          Agregar();
+          cod.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_jButton2KeyReleased
+
+    private void jdchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdchKeyReleased
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_jdchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       
+              if(jtabla.getRowCount() != 0){
+                  
+                   int row = jtabla.getSelectedRow();
+                   int newid = (int)jtabla.getValueAt(row, 0);                 
+                   
+                  for(Iterator < Producto> i = p2.iterator(); i.hasNext();)
+		   {
+		      if(i.next().getId() == newid)
+		        {
+		          i.remove();
+			}
+			 
+		    }
+                   
+                   DefaultTableModel dtm = (DefaultTableModel) jtabla.getModel();
+                   dtm.removeRow(row); 
+                   cod.requestFocusInWindow();
+               }
+              else{
+              
+                     Message.error(this, "No hay nada que Eliminar");
+              }
+           
+             
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void codKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codKeyPressed
+        // TODO add your handling code here:   
+        
+               
+          if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            
+          id = Integer.parseInt(cod.getText());
+            try {
+                  p = Conect.findAll();
+                 
+                   for(Producto p1: p){
+                       if(p1.getId() == id){
+                       
+                            producto.setText(p1.getNombre());
+                            desc.setText(p1.getCategoria());
+                            precio.setText(String.valueOf(p1.getPrecio()));
+                            c = true;               
+                       }
+                       
+                   }
+                   
+                    if(c == false){
+                   
+                       Message.error(this, "No tenemos productos con este codigo");
+                   }
+                    else
+                        cliente.requestFocusInWindow();
+          
+                
+                } 
+            catch (SQLException ex) {
+                Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+                  
+        }
+    }//GEN-LAST:event_codKeyPressed
+
+    private void codKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codKeyTyped
+
+    }//GEN-LAST:event_codKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -402,6 +500,7 @@ public class Ventas extends javax.swing.JDialog {
     private javax.swing.JTextField cliente;
     private javax.swing.JTextField cod;
     private javax.swing.JTextField desc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -426,7 +525,7 @@ public class Ventas extends javax.swing.JDialog {
     private javax.swing.JTextField producto;
     // End of variables declaration//GEN-END:variables
 
-   public void Table(){
+    public void Table(){
      
        int c = p2.size();
       
@@ -441,5 +540,41 @@ public class Ventas extends javax.swing.JDialog {
          }
       }
    }
+    
+    public void Agregar(){
+    
+      if(!cod.getText().equals("")){
+           
+        
+        for(int a = 0; a < p.size(); a++){
+            
+                Producto pr = p.get(a);
+               if(pr.getId() == id){
+          
+                 pr.setDate(jdch.getDate());
+                 pr.setCantidad(Integer.parseInt(cant.getText()));
+                 pr.setCliente(cliente.getText());
+                 p2.add(pr);
+                 
+               }
+            }
+        
+         Table();
+         producto.setText("");
+         desc.setText("");
+         precio.setText("");
+         cant.setText("");
+         cod.setText("");
+         
+         Date fecha = new Date();
+         jdch.setDateFormatString("dd/MM/yyyy");
+         jdch.setDate(fecha);
+        
+      }
+       else{
+            JOptionPane.showMessageDialog(this, "Debe Llenar los Campos Vacios","Message",JOptionPane.INFORMATION_MESSAGE);
+       
+       }
+    }
    
 }

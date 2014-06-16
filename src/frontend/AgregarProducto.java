@@ -166,6 +166,12 @@ public class AgregarProducto extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 11, 0, 0);
         jPanel2.add(txtProveedor, gridBagConstraints);
+
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 15;
         gridBagConstraints.gridy = 3;
@@ -295,6 +301,17 @@ public class AgregarProducto extends javax.swing.JDialog {
        } 
     }//GEN-LAST:event_txtPrecioKeyTyped
 
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char car = evt.getKeyChar();  
+       if((car<'0' || car>'9') && txtCosto.getText().contains("."))
+       {
+          evt.consume();
+       }else if((car<'0' || car>'9') && (car!='.'))
+       {
+           evt.consume();
+       }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -368,7 +385,7 @@ public class AgregarProducto extends javax.swing.JDialog {
    public boolean validateP()
    {
        boolean b = false;
-       if(!(txtNombre.getText().equals("") || txtPrecio.getText().equals("") || txtCosto.getText().equals("") || txtCantidad.getText()!="" ))
+       if(!(txtNombre.getText().equals("") || txtPrecio.getText().equals("") || txtCosto.getText().equals("") || txtCantidad.getText().equals("")))
        {
            b=true;
            try {

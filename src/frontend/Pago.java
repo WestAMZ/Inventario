@@ -29,7 +29,6 @@ public class Pago extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -74,7 +73,8 @@ public class Pago extends javax.swing.JDialog {
         jPanel3.setBackground(new java.awt.Color(0, 0, 102));
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        setBounds(0, 0, 504, 183);
+        setSize(new java.awt.Dimension(504, 183));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

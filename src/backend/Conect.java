@@ -33,7 +33,7 @@ public class Conect
             p.setProveedor(datos.getString("proveedor"));
             p.setCosto(datos.getFloat("costo"));
             p.setPrecio(datos.getFloat("precio"));
-        //  p.setDescripcion(datos.getString("descripcion"));
+            p.setDescripcion(datos.getString("descripcion"));
             p.setUnidades(datos.getInt("Cantidad"));
             productos.add(p);
         }
@@ -55,7 +55,8 @@ public class Conect
         }
         return b;
     }
-       public static void AgregarVenta(List<Producto> p) throws SQLException{
+  
+    public static void AgregarVenta(List<Producto> p) throws SQLException{
     
        List <Producto> pr = new ArrayList<>();
        pr.addAll(p);
@@ -64,7 +65,7 @@ public class Conect
        for(Producto pro: pr){
            total = pro.getCantidad() * pro.getPrecio();
            totalmessage += total ;
-             sentenciaPre = con.prepareStatement("insert into venta()values(?,?,?,?,?,?,?)");
+             sentenciaPre = con.prepareStatement("insert into venta()values(?,?,?,?,?,?,?,?)");
              
              
              sentenciaPre.setString(1, pro.getNombre());
@@ -74,6 +75,7 @@ public class Conect
              sentenciaPre.setFloat(5, pro.getPrecio());
              sentenciaPre.setString(6, pro.getCategoria());
              sentenciaPre.setDate(7, new java.sql.Date(pro.getDate().getTime()));
+             sentenciaPre.setInt(8, pro.getId());
              sentenciaPre.executeUpdate();
              total = 0;
        }
@@ -84,10 +86,28 @@ public class Conect
        return totalmessage;
     }
     
- /*   public static List<Producto> VerRVentas() throws SQLException{
+      public static List<Producto> VerRVentas() throws SQLException{
     
-            return p;
-       }*/
+        sentenciaPre = con.prepareStatement("select * from venta");
+        datos = sentenciaPre.executeQuery();
+        ArrayList<Producto> productos = new ArrayList<>();
+        while(datos.next())
+        {
+            Producto p = new Producto();
+            p.setNombre(datos.getString("producto"));
+            p.setCantidad(datos.getInt("unidades"));
+            p.setCosto(datos.getFloat("total"));     
+            p.setCliente(datos.getString("cliente"));
+            p.setPrecio(datos.getFloat("precio"));
+            p.setCategoria(datos.getString("Descripcion"));
+            p.setDate(datos.getDate("fecha"));    
+             p.setId(datos.getInt("id"));
+            
+            productos.add(p);
+        }
+        return productos;
+     }
+      
     public static void newProducto(Producto p) throws SQLException
     {
         
